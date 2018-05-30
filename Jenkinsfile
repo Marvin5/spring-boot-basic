@@ -2,16 +2,15 @@ pipeline {
     agent any
 
     environment {
-        NameSpace='8030_task'
-        WebServer='172.31.12.139'
-        port='8030'
+        NameSpace = '8030_task'
+        WebServer = '172.31.12.139'
+        port = '8030'
     }
-
     stages {
-        stage('git'){
+        stage('git') {
             steps {
                 step([$class: 'WsCleanup'])
-            git  poll: true,  url: 'https://github.com/Marvin5/spring-boot-basic.git', branch: 'master'
+                git poll: true, url: 'https://github.com/Marvin5/spring-boot-basic.git', branch: 'master'
             }
         }
         stage('Sonar') {
@@ -26,7 +25,7 @@ pipeline {
             }
         }
 
-       stage('build') {
+        stage('build') {
             steps {
                 sh './gradlew build'
             }
